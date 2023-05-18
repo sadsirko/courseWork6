@@ -9,7 +9,7 @@ public class DataGen {
     private final Random rnd;
     private final int MIN_VALUE  = 100;
     private final int MAX_VALUE = 10000; // 32768
-    private final int MIN_WEIGHT  = 100;
+    private final int MIN_WEIGHT  = 1;
     private final int MAX_WEIGHT = 10000;
     private final int MIN_CAPACITY  = 9900000;
     private final int MAX_CAPACITY = 10000000; // 32768
@@ -21,7 +21,7 @@ public class DataGen {
 
     public Parameters generateInputValues(int itemCount, int capacity) {
         return new Parameters(itemCount, capacity, generateArrayInBorders(itemCount, MIN_VALUE , MAX_VALUE),
-                generateArrayInBorders(itemCount, MIN_WEIGHT , MAX_WEIGHT));
+                generateArrayInBorders(itemCount, MIN_WEIGHT , capacity));
     }
 
     public Parameters generateInputValues(int itemCount) {

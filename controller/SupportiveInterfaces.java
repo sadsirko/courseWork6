@@ -1,6 +1,6 @@
 package controller;
 
-import Util.InvalidInputException;
+import util.InvalidInputException;
 
 interface ItemValidationFunction {
     int validateAndReturn(String input) throws InvalidInputException, NumberFormatException;

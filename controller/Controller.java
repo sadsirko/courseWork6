@@ -1,7 +1,7 @@
     package controller;
     import model.*;
-    import Util.InputValidation;
-    import Util.InvalidInputException;
+    import util.InputValidation;
+    import util.InvalidInputException;
     import view.View;
 
     import java.util.Scanner;
@@ -39,8 +39,8 @@
                                 getUserChoice(scanner, view.WEIGHTS_AUTOTEST_ENTER_MSG,
                                         inputValidator::validateAndReturnCapacityAuto),
                                 new SerialDPKnapsackSolver(),
-                                new KnapsackSolver[] { new ParallelDPKnapsackSolver(getUserChoice(scanner,
-                                        view.THREAD_NUMBER_ENTER_MSG, inputValidator::validateAndReturnThreadNumber)) });
+                                new ParallelDPKnapsackSolver(getUserChoice(scanner,
+                                        view.THREAD_NUMBER_ENTER_MSG, inputValidator::validateAndReturnThreadNumber)));
                         break;
                     default:
                         view.printMessage(view.INVALID_OPTION_MSG);
@@ -92,15 +92,15 @@
         }
 
         public void processComparisonOption(int maxItemNumber, int maxCapacity, KnapsackSolver referenceSolver,
-                                            KnapsackSolver[] comparedSolvers) {
+                                            KnapsackSolver comparedSolver) {
             model.setNewSolver(referenceSolver);
             view.printExecutionStatus(referenceSolver);
             model.addTestSolutions(model.runTestSets(model.generateTestSets(maxItemNumber, maxCapacity)));
-            for (var solver : comparedSolvers) {
-                model.setNewSolver(solver);
+
+                model.setNewSolver(comparedSolver);
                 model.addTestSolutions(model.runTestSets());
-                view.printExecutionStatus(solver);
-            }
+                view.printExecutionStatus(comparedSolver);
+
             view.printTestSolutions(model.getTestSolutions());
             view.printMessage(
 //перевірка

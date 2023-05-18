@@ -15,11 +15,6 @@ public class Model {
         dataGenerator = new DataGen();
         testSolutions = new ArrayList<ArrayList<Solution>>();
     }
-
-    public ArrayList<Solution> runTestSets(ArrayList<Parameters> testSets) {
-        return runCertainTestSet(testSets);
-    }
-
     public ArrayList<Solution> runTestSets() {
         return runCertainTestSet(testSet);
     }
@@ -27,6 +22,11 @@ public class Model {
     public Parameters generateInputValues(int itemsNumber) {
         return dataGenerator.generateInputValues(itemsNumber);
     }
+
+    public ArrayList<Solution> runTestSets(ArrayList<Parameters> testSets) {
+        return runCertainTestSet(testSets);
+    }
+
 
     public void setNewSolver(KnapsackSolver knapsackSolver) {
         solver.setSolver(knapsackSolver);
