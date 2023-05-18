@@ -2,8 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-public class SequentialKnapsackSolver extends KnapsackSolver {
-    public SolutionKnapsack solve(int n, int val[], int wt[], int W) {
+public class SerialDPKnapsackSolver extends KnapsackSolver {
+    public Solution solve(int n, int val[], int wt[], int W) {
 
         long startTime = System.nanoTime();
 
@@ -39,7 +39,7 @@ public class SequentialKnapsackSolver extends KnapsackSolver {
         }
 
         long dur = (System.nanoTime() - startTime)/ 1000000;
-        return new SolutionKnapsack(n, W, K[n][W], itemsUsed, dur ,
+        return new Solution(n, W, K[n][W], itemsUsed, dur ,
                 this);
     }
 }

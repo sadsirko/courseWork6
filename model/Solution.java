@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class SolutionKnapsack {
+public class Solution {
     private final int itemNumber;
     private final int initialCapacity;
     private final int maxWorth;
@@ -10,8 +10,8 @@ public class SolutionKnapsack {
     private final double timeElapsed;
     private final KnapsackSolver solverUsed;
 
-    public SolutionKnapsack(int itemsNumber, int initialCapacity, int maxWorth, ArrayList<Integer> itemsUsed,
-                            double timeElapsed, KnapsackSolver solverUsed) {
+    public Solution(int itemsNumber, int initialCapacity, int maxWorth, ArrayList<Integer> itemsUsed,
+                    double timeElapsed, KnapsackSolver solverUsed) {
         this.itemNumber = itemsNumber;
         this.initialCapacity = initialCapacity;
         this.maxWorth = maxWorth;
@@ -20,7 +20,7 @@ public class SolutionKnapsack {
         this.solverUsed = solverUsed;
     }
 
-    public static boolean validateSolutions(ArrayList<ArrayList<SolutionKnapsack>> solutions) {
+    public static boolean validateSolutions(ArrayList<ArrayList<Solution>> solutions) {
         for (int i = 0; i < solutions.size() - 1; i++) {
             if (!solutions.get(i).equals(solutions.get(i + 1))) {
                 return false;
@@ -62,7 +62,7 @@ public class SolutionKnapsack {
             return false;
         }
 
-        SolutionKnapsack comparedSolution = (SolutionKnapsack) obj;
+        Solution comparedSolution = (Solution) obj;
         return (itemNumber == comparedSolution.itemNumber && initialCapacity == comparedSolution.initialCapacity
                 && maxWorth == comparedSolution.maxWorth && itemsUsed.equals(comparedSolution.itemsUsed));
     }

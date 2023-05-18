@@ -1,11 +1,11 @@
 package tetsdata;
 
-import model.InputValues;
+import model.Parameters;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class DataGenerator {
+public class DataGen {
     private final Random rnd;
     private final int MIN_VALUE  = 100;
     private final int MAX_VALUE = 10000; // 32768
@@ -15,17 +15,17 @@ public class DataGenerator {
     private final int MAX_CAPACITY = 10000000; // 32768
     private final int NUMBER_OF_SETS = 10;
 
-    public DataGenerator() {
+    public DataGen() {
         rnd = new Random();
     }
 
-    public InputValues generateInputValues(int itemCount, int capacity) {
-        return new InputValues(itemCount, capacity, generateArrayInBorders(itemCount, MIN_VALUE , MAX_VALUE),
+    public Parameters generateInputValues(int itemCount, int capacity) {
+        return new Parameters(itemCount, capacity, generateArrayInBorders(itemCount, MIN_VALUE , MAX_VALUE),
                 generateArrayInBorders(itemCount, MIN_WEIGHT , MAX_WEIGHT));
     }
 
-    public InputValues generateInputValues(int itemCount) {
-        return new InputValues(itemCount, rnd.nextInt(MIN_CAPACITY , MAX_CAPACITY),
+    public Parameters generateInputValues(int itemCount) {
+        return new Parameters(itemCount, rnd.nextInt(MIN_CAPACITY , MAX_CAPACITY),
                 generateArrayInBorders(itemCount, MIN_VALUE , MAX_VALUE),
                 generateArrayInBorders(itemCount, MIN_WEIGHT , MAX_WEIGHT));
     }
@@ -38,8 +38,8 @@ public class DataGenerator {
         return arr;
     }
 
-    public ArrayList<InputValues> generateTestSets(int maxItemNumber, int maxCapacity) {
-        ArrayList<InputValues> testSets = new ArrayList<InputValues>(NUMBER_OF_SETS);
+    public ArrayList<Parameters> generateTestSets(int maxItemNumber, int maxCapacity) {
+        ArrayList<Parameters> testSets = new ArrayList<Parameters>(NUMBER_OF_SETS);
         int setSizeItems = maxItemNumber / NUMBER_OF_SETS;
         int setSizeCapacity = maxCapacity / NUMBER_OF_SETS;
         for (int i = 0; i < NUMBER_OF_SETS; i++) {

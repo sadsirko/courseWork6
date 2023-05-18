@@ -1,21 +1,22 @@
     package controller;
     import model.*;
-    import Util.InputValidator;
+    import Util.InputValidation;
     import Util.InvalidInputException;
     import view.View;
+
     import java.util.Scanner;
 
     public class Controller {
         private final Model model;
         private final View view;
-        private final InputValidator inputValidator;
+        private final InputValidation inputValidator;
 
         private Scanner scanner;
 
         public Controller() {
             model = new Model();
             view = new View();
-            inputValidator = new InputValidator();
+            inputValidator = new InputValidation();
             scanner = new Scanner(System.in);
         }
 
@@ -25,11 +26,11 @@
             while (choice  != View.MENU_EXIT) {
                 switch (choice ) {
                     case View.MENU_CHOOSE_PARALLEL:
-                        runOneAlgorithm(scanner, new ParallelKnapsackSolver(getUserChoice(scanner,
+                        runOneAlgorithm(scanner, new ParallelDPKnapsackSolver(getUserChoice(scanner,
                                 view.THREAD_NUMBER_ENTER_MSG, inputValidator::validateAndReturnThreadNumber)));
                         break;
                     case View.MENU_CHOOSE_SEQ:
-                        runOneAlgorithm(scanner, new SequentialKnapsackSolver());
+                        runOneAlgorithm(scanner, new SerialDPKnapsackSolver());
                         break;
                     case View.MENU_CHOOSE_COMPARE:
                         processComparisonOption(
@@ -37,8 +38,8 @@
                                         inputValidator::validateAndReturnItemNumberAuto),
                                 getUserChoice(scanner, view.WEIGHTS_AUTOTEST_ENTER_MSG,
                                         inputValidator::validateAndReturnCapacityAuto),
-                                new SequentialKnapsackSolver(),
-                                new KnapsackSolver[] { new ParallelKnapsackSolver(getUserChoice(scanner,
+                                new SerialDPKnapsackSolver(),
+                                new KnapsackSolver[] { new ParallelDPKnapsackSolver(getUserChoice(scanner,
                                         view.THREAD_NUMBER_ENTER_MSG, inputValidator::validateAndReturnThreadNumber)) });
                         break;
                     default:
@@ -51,8 +52,8 @@
             scanner.close();
         }
 
-        public InputValues readItemsNumber(Scanner sc, int itemsNum) {
-            return new InputValues(itemsNum,
+        public Parameters readItemsNumber(Scanner sc, int itemsNum) {
+            return new Parameters(itemsNum,
                     getUserChoice(sc, view.MAX_CAPACITY_ENTER_MSG, inputValidator::validateAndReturnCapacity),
                     readArrayUntilCorrect(sc, itemsNum, view.WORTH_ENTER_MSG, inputValidator::validateValuesArray),
                     readArrayUntilCorrect(sc, itemsNum, view.WEIGHTS_ENTER_MSG, inputValidator::validateWeightsArray));
@@ -64,7 +65,7 @@
                     inputValidator::validateAndReturnSubMenuItem);
             int n, maxCapacity;
             int[] values, weights;
-            InputValues res;
+            Parameters res;
             switch (submenuOption) {
                 case View.SUBMENU_MANUAL:
                     n = getUserChoice(sc, view.VALUES_MANUAL_ENTER_MSG,

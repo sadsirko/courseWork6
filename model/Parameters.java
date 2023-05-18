@@ -1,16 +1,16 @@
 package model;
 
-public class InputValues {
+public class Parameters {
     private final int itemsNum;
     private int maxCapacity;
     private int[] values;
     private int[] weights;
 
-    public InputValues(int itemsNum) {
+    public Parameters(int itemsNum) {
         this.itemsNum = itemsNum;
     }
 
-    public InputValues(int itemsNum, int maxCapacity, int[] values, int[] weights) {
+    public Parameters(int itemsNum, int maxCapacity, int[] values, int[] weights) {
         this.itemsNum = itemsNum;
         this.maxCapacity = maxCapacity;
         this.values = values;

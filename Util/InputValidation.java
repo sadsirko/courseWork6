@@ -3,11 +3,11 @@ package Util;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InputValidator {
+public class InputValidation {
     private Map<String, String> regexMap;
     private Map<String, Pair<Integer, Integer>> limitMap;
 
-    public InputValidator() {
+    public InputValidation() {
         regexMap = new HashMap<>();
         regexMap.put("menuItem", "^[1-4]$");
         regexMap.put("submenuItem", "^[1-2]$");

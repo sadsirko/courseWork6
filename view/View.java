@@ -1,7 +1,7 @@
 package view;
 
 import model.KnapsackSolver;
-import model.SolutionKnapsack;
+import model.Solution;
 
 import java.util.ArrayList;
 
@@ -43,9 +43,9 @@ public class View {
         System.out.print(message);
     }
 
-    public void printTestSolutions(ArrayList<ArrayList<SolutionKnapsack>> testSolutions) {
+    public void printTestSolutions(ArrayList<ArrayList<Solution>> testSolutions) {
         for (int i = 0; i < testSolutions.size(); i++) {
-            ArrayList<SolutionKnapsack> solutionsSet = testSolutions.get(i);
+            ArrayList<Solution> solutionsSet = testSolutions.get(i);
             System.out.println(SOLVER_USED_MSG + solutionsSet.get(0).getSolverUsed().toString());
             for (int j = 0; j < solutionsSet.size(); j++) {
                 System.out.println(STEP_EXECUTING_MSG + "[" + solutionsSet.get(j).getItemNumber() + ", " + solutionsSet.get(j).getInitialCapacity() + "]" + ": ");
@@ -63,7 +63,7 @@ public class View {
         System.out.println("Вирішувач " + solver.toString() + " закінчив обчислення!");
     }
 
-    public void printSolution(SolutionKnapsack solution) {
+    public void printSolution(Solution solution) {
         StringBuilder sb = new StringBuilder();
         sb.append("\n")
                 .append(MAX_VALUE_RESULT_MSG)

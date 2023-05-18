@@ -1,30 +1,30 @@
 package model;
 
-import tetsdata.DataGenerator;
+import tetsdata.DataGen;
 
 import java.util.ArrayList;
 
 public class Model {
     private final Solver solver;
-    private final DataGenerator dataGenerator;
-    private ArrayList<InputValues> testSet;
-    private ArrayList<ArrayList<SolutionKnapsack>> testSolutions;
+    private final DataGen dataGenerator;
+    private ArrayList<Parameters> testSet;
+    private ArrayList<ArrayList<Solution>> testSolutions;
 
     public Model() {
         solver = new Solver();
-        dataGenerator = new DataGenerator();
-        testSolutions = new ArrayList<ArrayList<SolutionKnapsack>>();
+        dataGenerator = new DataGen();
+        testSolutions = new ArrayList<ArrayList<Solution>>();
     }
 
-    public ArrayList<SolutionKnapsack> runTestSets(ArrayList<InputValues> testSets) {
+    public ArrayList<Solution> runTestSets(ArrayList<Parameters> testSets) {
         return runCertainTestSet(testSets);
     }
 
-    public ArrayList<SolutionKnapsack> runTestSets() {
+    public ArrayList<Solution> runTestSets() {
         return runCertainTestSet(testSet);
     }
 
-    public InputValues generateInputValues(int itemsNumber) {
+    public Parameters generateInputValues(int itemsNumber) {
         return dataGenerator.generateInputValues(itemsNumber);
     }
 
@@ -32,33 +32,33 @@ public class Model {
         solver.setSolver(knapsackSolver);
     }
 
-    public ArrayList<InputValues> generateTestSets(int maxItemNumber, int maxCapacity) {
+    public ArrayList<Parameters> generateTestSets(int maxItemNumber, int maxCapacity) {
         testSolutions.clear();
         testSet = dataGenerator.generateTestSets(maxItemNumber, maxCapacity);
         return testSet;
     }
 
-    public boolean checkIfEverythingIsSimilar(ArrayList<ArrayList<SolutionKnapsack>> solutions) {
-        return SolutionKnapsack.validateSolutions(solutions);
+    public boolean checkIfEverythingIsSimilar(ArrayList<ArrayList<Solution>> solutions) {
+        return Solution.validateSolutions(solutions);
     }
 
-    public void addTestSolutions(ArrayList<SolutionKnapsack> solutions) {
+    public void addTestSolutions(ArrayList<Solution> solutions) {
         testSolutions.add(solutions);
     }
 
-    private ArrayList<SolutionKnapsack> runCertainTestSet(ArrayList<InputValues> testSets) {
-        ArrayList<SolutionKnapsack> result = new ArrayList<SolutionKnapsack>(testSets.size());
+    private ArrayList<Solution> runCertainTestSet(ArrayList<Parameters> testSets) {
+        ArrayList<Solution> result = new ArrayList<Solution>(testSets.size());
         for (var inputValues : testSets) {
             result.add(solver.solve(inputValues));
         }
         return result;
     }
 
-    public SolutionKnapsack solve(int itemsNum, int values[], int weights[], int capacity) {
+    public Solution solve(int itemsNum, int values[], int weights[], int capacity) {
         return solver.solve(itemsNum, values, weights, capacity);
     }
 
-    public ArrayList<ArrayList<SolutionKnapsack>> getTestSolutions() {
+    public ArrayList<ArrayList<Solution>> getTestSolutions() {
         return testSolutions;
     }
 }

@@ -4,22 +4,21 @@ import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
-public class ParallelKnapsackSolver extends KnapsackSolver {
+public class ParallelDPKnapsackSolver extends KnapsackSolver {
     private int threadCount;
 
-    public ParallelKnapsackSolver() {
+    public ParallelDPKnapsackSolver() {
         this.threadCount = Runtime.getRuntime().availableProcessors();
     }
 
-    public ParallelKnapsackSolver(int threadCount) {
+    public ParallelDPKnapsackSolver(int threadCount) {
         this.threadCount = Runtime.getRuntime().availableProcessors();
         if(threadCount < this.threadCount)
             this.threadCount = threadCount;
     }
 
-    public SolutionKnapsack solve(int num, int values[], int weights[], int volume) {
+    public Solution solve(int num, int values[], int weights[], int volume) {
 //        створюється пул потоків
         ExecutorService pool = Executors.newFixedThreadPool(threadCount);
 
@@ -76,7 +75,7 @@ public class ParallelKnapsackSolver extends KnapsackSolver {
 
         long duration = (System.nanoTime() - startTime) / 1000000;
 
-        return new SolutionKnapsack(num, volume, dpTable[num][volume], itemsUsed, duration,
+        return new Solution(num, volume, dpTable[num][volume], itemsUsed, duration,
                 this);
     }
 }
