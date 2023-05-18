@@ -96,11 +96,9 @@
             model.setNewSolver(referenceSolver);
             view.printExecutionStatus(referenceSolver);
             model.addTestSolutions(model.runTestSets(model.generateTestSets(maxItemNumber, maxCapacity)));
-
-                model.setNewSolver(comparedSolver);
-                model.addTestSolutions(model.runTestSets());
-                view.printExecutionStatus(comparedSolver);
-
+            model.setNewSolver(comparedSolver);
+            model.addTestSolutions(model.runTestSets());
+            view.printExecutionStatus(comparedSolver);
             view.printTestSolutions(model.getTestSolutions());
             view.printMessage(
 //перевірка

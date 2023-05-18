@@ -46,7 +46,7 @@ public class ParallelDPKnapsackSolver extends KnapsackSolver {
                                     values[currentItem - 1] + dpTable[currentItem - 1][w - weights[currentItem - 1]]);
                         }
                     }
-//лічильник CountDownLatch зменшується на одиницю
+//лічильник Latch зменшується на одиницю
                     latch.countDown();
                 });
             }

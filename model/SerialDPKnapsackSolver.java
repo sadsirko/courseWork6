@@ -8,20 +8,20 @@ public class SerialDPKnapsackSolver extends KnapsackSolver {
         long startTime = System.nanoTime();
 
         int i, w;
-        int K[][] = new int[num + 1][volumes + 1];
+        int dpTable[][] = new int[num + 1][volumes + 1];
 
         // Build table K[][] in bottom up manner
         for (i = 0; i <= num; i++) {
             for (w = 0; w <= volumes; w++) {
                 if (i == 0 || w == 0)
-                    K[i][w] = 0;
+                    dpTable[i][w] = 0;
                 else if (weights[i - 1] <= w)
-                    K[i][w]
+                    dpTable[i][w]
                             = Math.max(values[i - 1]
-                                    + K[i - 1][w - weights[i - 1]],
-                            K[i - 1][w]);
+                                    + dpTable[i - 1][w - weights[i - 1]],
+                            dpTable[i - 1][w]);
                 else
-                    K[i][w] = K[i - 1][w];
+                    dpTable[i][w] = dpTable[i - 1][w];
             }
         }
 
@@ -31,7 +31,7 @@ public class SerialDPKnapsackSolver extends KnapsackSolver {
         int w_counter = volumes;
 
         while (n_counter > 0) {
-            if (K[n_counter][w_counter] != K[n_counter - 1][w_counter]) {
+            if (dpTable[n_counter][w_counter] != dpTable[n_counter - 1][w_counter]) {
                 itemsUsed.add(n_counter);
                 w_counter -= weights[n_counter - 1];
             }
@@ -39,7 +39,7 @@ public class SerialDPKnapsackSolver extends KnapsackSolver {
         }
 
         long dur = (System.nanoTime() - startTime)/ 1000000;
-        return new Solution(num, volumes, K[num][volumes], itemsUsed, dur ,
+        return new Solution(num, volumes, dpTable[num][volumes], itemsUsed, dur ,
                 this);
     }
 }
